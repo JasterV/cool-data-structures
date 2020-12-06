@@ -1,30 +1,20 @@
-use std::rc::Rc;
-
-enum Node<T> {
-    Header {
-        first: Option<Rc<Node<T>>>,
-        last: Option<Rc<Node<T>>>,
-    },
-    Child {
-        elem: T,
-        next: Rc<Node<T>>,
-        prev: Rc<Node<T>>,
-    },
-}
+use std::{cell::RefCell, rc::Rc};
+use crate::models::linked_list::{Node, SharedNode};
 
 pub struct DoublyLinkedList<T> {
     length: u64,
-    root: Node<T>,
+    root: Rc<RefCell<Node<T>>>,
 }
 
 impl<T> DoublyLinkedList<T> {
     pub fn new() -> Self {
         DoublyLinkedList {
             length: 0,
-            root: Node::Header {
-                first: None,
-                last: None,
-            },
+            root: Rc::new(RefCell::new(Node::new_head())),
         }
+    }
+
+    pub fn length(&self) -> u64 {
+        self.length
     }
 }
