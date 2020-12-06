@@ -4,42 +4,43 @@ pub type SharedNode<T> = Rc<RefCell<Option<Node<T>>>>;
 
 #[allow(dead_code)]
 pub struct Node<T> {
-    elem: Option<T>,
-    next: SharedNode<T>,
-    prev: SharedNode<T>,
+    pub elem: Option<T>,
+    pub next: SharedNode<T>,
+    pub prev: SharedNode<T>,
 }
 
-#[allow(dead_code)]
 impl<T> Node<T> {
-    pub fn new(value: T, next: &SharedNode<T>, prev: &SharedNode<T>) -> Self {
-        Node {
-            elem: Some(value),
-            next: Rc::clone(next),
-            prev: Rc::clone(prev),
-        }
-    }
-
-    pub fn new_head() -> Self {
-        Node {
-            elem: None,
+    pub fn new_shared(value: Option<T>) -> SharedNode<T> {
+        Rc::new(RefCell::new(Some(Node {
+            elem: value,
             next: Rc::new(RefCell::new(None)),
             prev: Rc::new(RefCell::new(None)),
-        }
+        })))
+    }
+    
+    pub fn is_none(node: &SharedNode<T>) -> bool {
+        node.borrow_mut().is_none()
     }
 
-    pub fn elem(&self) -> Option<&T> {
-        self.elem.as_ref()
+    pub fn get_prev(node: &SharedNode<T>) -> SharedNode<T> {
+        Rc::clone(&(*node.borrow_mut()).as_mut().unwrap().prev)
     }
 
-    pub fn elem_mut(&mut self) -> Option<&mut T> {
-        self.elem.as_mut()
+    pub fn get_next(node: &SharedNode<T>) -> SharedNode<T> {
+        Rc::clone(&(*node.borrow_mut()).as_mut().unwrap().next)
     }
 
-    pub fn next(&self) -> SharedNode<T> {
-        Rc::clone(&self.next)
+    pub fn set_prev(node: &SharedNode<T>, to: &SharedNode<T>) {
+        let node = Rc::clone(node);
+        let ref mut node = *node.borrow_mut();
+        let node = node.as_mut().unwrap();
+        node.prev = Rc::clone(to);
     }
 
-    pub fn prev(&self) -> SharedNode<T> {
-        Rc::clone(&self.prev)
+    pub fn set_next(node: &SharedNode<T>, to: &SharedNode<T>) {
+        let node = Rc::clone(node);
+        let ref mut node = *node.borrow_mut();
+        let node = node.as_mut().unwrap();
+        node.next = Rc::clone(to);
     }
 }
