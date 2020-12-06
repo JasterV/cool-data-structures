@@ -2,5 +2,5 @@
 
 
 
-![assets/doubly-list.png]()
+![linked list](assets/doubly-list.png)
 
