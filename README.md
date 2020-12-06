@@ -2,5 +2,5 @@
 
 
 
-![/assets/doubly-list.png]()
+![assets/doubly-list.png]()
 
