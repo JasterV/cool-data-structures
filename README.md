@@ -9,7 +9,7 @@ A doubly linked list implemented with Rust, it use [Reference counters](https://
 ## Sorted Binary Tree
 
 A simple binary Tree which stores its elements in an ordered way.
-It has implemented the 3 most common traversals for binary trees: Inorder, postorder and preorder.
+It implements the 3 most common traversals for binary trees: Inorder, postorder and preorder.
 
 ![binary tree](assets/binary-tree.png)
 
