@@ -1,6 +1,6 @@
 # Doubly Linked List
 
+A doubly linked list implemented with Rust!
 
-
-![/assets/doubly-list.png]()
+![linked list](assets/doubly-list.png)
 
