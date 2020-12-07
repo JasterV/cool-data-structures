@@ -57,15 +57,22 @@ impl<T> DoublyLinkedList<T> {
         self._get_node(index).and_then(|rc| Node::get_elem(&rc))
     }
 
+    pub fn set(&self, index: u64, value: T) {
+        let elem = self._get_node(index)
+            .and_then(|rc| Node::get_elem(&rc))
+            .expect("Index out of bounds");
+        *elem.borrow_mut() = value;
+    }
+
     pub fn remove(&mut self, index: u64) -> Result<(), String> {
         let node = self._get_node(index).ok_or(String::from("Invalid index"))?;
-        
+
         let prev = Node::get_prev(&node).unwrap();
         let next = Node::get_next(&node).unwrap();
 
         Node::set_next(&prev, Some(&next));
         Node::set_prev(&next, Some(&prev));
-        
+
         if self.length == 1 {
             Node::set_next(&self.root, None);
             Node::set_prev(&self.root, None);
