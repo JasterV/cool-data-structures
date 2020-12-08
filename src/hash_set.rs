@@ -43,9 +43,11 @@ impl<T: Hash + PartialEq + Clone> HashSet<T> {
         match self.data[index] {
             Some(ref mut list) => list.push_front(value),
             None => {
-                let mut list = LinkedList::new();
-                list.push_back(value);
-                self.data[index] = Some(list)
+                self.data[index] = {
+                    let mut list = LinkedList::new();
+                    list.push_back(value);
+                    Some(list)
+                }
             }
         }
         self.size += 1;
