@@ -13,3 +13,11 @@ It implements the 3 most common traversals for binary trees: Inorder, postorder 
 
 ![binary tree](assets/binary-tree.png)
 
+## Hash Set
+
+A Hash Set implemented as a Hash Map (A list of buckets where each bucket owns a Linked List with values)
+
+![hash map](assets/hash_map.png)
+
+    This is diagram does not represent a HashSet but a HashMap
+
