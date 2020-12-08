@@ -19,5 +19,5 @@ A Hash Set implemented as a Hash Map (A list of buckets where each bucket owns a
 
 ![hash map](assets/hash_map.jpeg)
 
-    This is diagram does not represent a HashSet but a HashMap
+    This diagram does not represent a HashSet but a HashMap
 
